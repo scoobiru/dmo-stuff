@@ -2,25 +2,27 @@
 SETLOCAL
 
 :SetParams
-SET node=solo
+SET node=stratum
 SET device=GPU
 SET platform=<0...n>
 SET card=<0...n>
-SET host=http://<host>:<port>/
-SET user=<user>
-SET password=<password>
+SET host=<host>
+SET port=<port>
 SET wallet=<wallet>
+SET worker=<worker>
 
-:RunSolo
+:RunYiimp
 SET minerbin=DynMiner2.exe
+SET diff=<2...n>
+SET password=d=%diff%
 SET compute=<1024...n>
 SET workitems=<32,64,128,256,512>
-SET params=-mode %node% -server %host% -user %user% -pass %password% -wallet %wallet% -miner %device%,%compute%,%workitems%,%platform%,%card%
+SET params=-mode %node% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%
 ECHO Starting %minerbin% %node% instance on %device% at %host% to %wallet%
-START /MIN "Solo Miner" %minerbin% %params%
+START /MIN "Yiimp Miner" %minerbin% %params%
 TIMEOUT /T <seconds>
 taskkill /F /IM %minerbin%
-GOTO RunSolo
+GOTO RunYiimp
 
 ENDLOCAL
 EXIT /B 2
