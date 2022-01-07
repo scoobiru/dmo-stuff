@@ -17,8 +17,10 @@ When a firewall is created, the default inbound policy is **ACCEPT**. Again, it 
 - Allow miner traffic to RPC listener for solo mining
     - 6433/tcp from <ip address/32>
 
-### Basic process flow
-This assumes a Linode account has already been created.
+Once the firewall is created with rules configured, Linode instances can be added to the firewall from the Linodes tab after clicking on the firewall name. As mentioned in help tips, a Linode instance can only be associated to one firewall. It may be suggested to set up another default firewall for assocation without the full-node traffic allowance while initially setting up the Docker container and/or completing needed system updates on a freshly-provisioned instance.
+
+### Linode instance creation basic process flow
+There's plenty of help on the Linode site on how to generally create an instance. These steps are specific to the setup of Docker/Docker-Compose and the repos/images needed for the dmo-node container.
 
 - Create Linode Ubuntu instance in preferred region. At this time, we are not using any region-specific linode feature.
     - Unless building a new image from the repo, the smallest nanode size should suffice.
@@ -69,7 +71,7 @@ This assumes a Linode account has already been created.
     docker-compose logs -f node
     ```
 
-### Linode stuff
+### Linode instance docker-compose details
 If docker is installed via snap above, the binary will reside in a different location than what is referred to in the dmo-node.service file. There are different ways to update this, but symbolic links work well enough.
 
 - Symlink the snap binary for docker-compose to the /usr/local/bin/ directory
