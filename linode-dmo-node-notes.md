@@ -1,4 +1,4 @@
-# Linode-dmo-notes
+# Linode-dmo-node-notes
 
 Some notes on the process of spinning up a Dynamo node using docker and Merdball's dmo-node repo/dockerhub image:
 
@@ -7,6 +7,7 @@ docker image: https://hub.docker.com/r/nerdmaster/dmo-node
 
 ### IMPORTANT FIREWALL STUFF
 It seems that any Linode instance created has all ports allowed **INBOUND** and OUTBOUND by **DEFAULT** aside from any host firewall that may be subsequently installed/configured on the instance. From a security standpoint, this is generally bad. Prior to creating any Linode instance, it is highly suggested to create a Linode firewall via the web console. They are included in the service free of charge and can be associated with any subsequently created Linode instances.
+
 When a firewall is created, the default inbound policy is **ACCEPT**. Again, it is suggested to set the default inbound policy to **DROP** after which rules may be added to accept traffic on specific ports or from specific addresses. There are drop-downs in the rule configuration interface for common values in the port and address fields.
 ##### Some Suggested Rules:
 - Allow full-node traffic from DMO network
