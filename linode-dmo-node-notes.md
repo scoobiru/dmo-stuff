@@ -5,6 +5,9 @@ Some notes on the process of spinning up a Dynamo node using docker and Merdball
 repo: https://github.com/Nerdmaster/dmo-node
 docker image: https://hub.docker.com/r/nerdmaster/dmo-node
 
+These notes assume basic Linux terminal/command-line operational knowledge such as navigating directory structure and file editing with vi/vim.
+If there are any unfamiliar general terms or concepts metnioned here, Google is your friend for finding elaboration.
+
 ### IMPORTANT FIREWALL STUFF
 It seems that any Linode instance created has all ports allowed **INBOUND** and OUTBOUND by **DEFAULT** aside from any host firewall that may be subsequently installed/configured on the instance. From a security standpoint, this is generally bad. Prior to creating any Linode instance, it is highly suggested to create a Linode firewall via the web console. They are included in the service free of charge and can be associated with any subsequently created Linode instances.
 
@@ -17,10 +20,19 @@ When a firewall is created, the default inbound policy is **ACCEPT**. Again, it 
 - Allow miner traffic to RPC listener for solo mining
     - 6433/tcp from <ip address/32>
 
-Once the firewall is created with rules configured, Linode instances can be added to the firewall from the Linodes tab after clicking on the firewall name. As mentioned in help tips, a Linode instance can only be associated to one firewall. It may be suggested to set up another default firewall for assocation without the full-node traffic allowance while initially setting up the Docker container and/or completing needed system updates on a freshly-provisioned instance.
+Once the firewall is created with rules configured, Linode instances can be added to the firewall from the Linodes tab after clicking on the firewall name. As mentioned in site's help tips, a Linode instance can only be associated to one firewall. It may be suggested to set up another default firewall for assocation without the full-node traffic allowance while initially setting up the Docker container and/or completing needed system updates on a freshly-provisioned instance.
+
+### Linode instance sizing
+While the dmo-node container can run on the smallest Nanode (Shared 1CPU-1GB) instance size, blockchain indexing and sync'ing may be quicker on a slightly larger instance size such as the 1CPU-2GB or 2CPU-4GB Shared CPU Linodes.
+
+Linodes instances may be freely sized up or down as constrained by the allocated disk size. By reducing the disk size of larger Linode instances to the disk size of the smallest instance size (25088 MB), the instance may be resized freely when powered off. This reduced disk size will still easily accommodate the operational Docker image and container volume including the fully sync'd blockchain at the present time.
+
+As resource requirements increase in the future, of course the Linode instance may still be resized up along with increased disk space as needed.
 
 ### Linode instance creation basic process flow
 There's plenty of help on the Linode site on how to generally create an instance. These steps are specific to the setup of Docker/Docker-Compose and the repos/images needed for the dmo-node container.
+
+Additionally, these steps could also be used to create a dmo-node container on a local Ubuntu installation.
 
 - Create Linode Ubuntu instance in preferred region. At this time, we are not using any region-specific linode feature.
     - Unless building a new image from the repo, the smallest nanode size should suffice.
@@ -86,4 +98,9 @@ If docker is installed via snap above, the binary will reside in a different loc
     ```
     Requires=snap.docker.dockerd.service
     After=snap.docker.dockerd.service
+    ```
+- Enable the service from within the /opt/dmo-node directory
+    ```bash
+    systemctl enable $(pwd)/dmo-node.service
+    systemctl start dmo-node
     ```
