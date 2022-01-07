@@ -5,7 +5,7 @@ Some notes on the process of spinning up a Dynamo node using docker and Merdball
 repo: https://github.com/Nerdmaster/dmo-node
 docker image: https://hub.docker.com/r/nerdmaster/dmo-node
 
-# Basic process flow
+### Basic process flow
 This assumes a Linode account has already been created.
 
 - Create Linode Ubuntu instance in preferred region. At this time, we are not using any region-specific linode feature.
@@ -57,7 +57,7 @@ This assumes a Linode account has already been created.
     docker-compose logs -f node
     ```
 
-# Linode stuff
+### Linode stuff
 If docker is installed via snap above, the binary will reside in a different location than what is referred to in the dmo-node.service file. There are different ways to update this, but symbolic links work well enough.
 
 - Symlink the snap binary for docker-compose to the /usr/local/bin/ directory
