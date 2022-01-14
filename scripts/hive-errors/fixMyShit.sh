@@ -2,7 +2,7 @@
 # Lib installs for common errors on Hive
 # Run script as root/sudo
 # CL/CL.h ERROR
-apt-get install opencl-headers
+apt install opencl-headers
 
 # libOpenCL.so.1 ERROR
 apt install ocl-icd-libopencl1
