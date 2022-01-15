@@ -10,6 +10,7 @@ SET host=<host>
 SET port=<port>
 SET wallet=<wallet>
 SET worker=<worker>
+SET timeout=<seconds>
 
 :RunYiimp
 SET minerbin=DynMiner2.exe
@@ -20,7 +21,7 @@ SET workitems=<32,64,128,256,512>
 SET params=-mode %node% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%
 ECHO Starting %minerbin% %node% instance on %device% at %host% to %wallet%
 START /MIN "Yiimp Miner" %minerbin% %params%
-TIMEOUT /T <seconds>
+TIMEOUT /T %timeout%
 taskkill /F /IM %minerbin%
 GOTO RunYiimp
 

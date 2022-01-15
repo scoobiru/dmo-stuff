@@ -10,6 +10,7 @@ SET host=http://<host>:<port>/
 SET user=<user>
 SET password=<password>
 SET wallet=<wallet>
+SET timeout=<seconds>
 
 :RunSolo
 SET minerbin=DynMiner2.exe
@@ -18,7 +19,7 @@ SET workitems=<32,64,128,256,512>
 SET params=-mode %node% -server %host% -user %user% -pass %password% -wallet %wallet% -miner %device%,%compute%,%workitems%,%platform%,%card%
 ECHO Starting %minerbin% %node% instance on %device% at %host% to %wallet%
 START /MIN "Solo Miner" %minerbin% %params%
-TIMEOUT /T <seconds>
+TIMEOUT /T %timeout%
 taskkill /F /IM %minerbin%
 GOTO RunSolo
 
