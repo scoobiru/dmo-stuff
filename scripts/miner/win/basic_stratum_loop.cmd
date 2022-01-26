@@ -2,7 +2,7 @@
 SETLOCAL
 
 ::Params, fill in <> with chosen values
-SET node=stratum
+SET mode=stratum
 SET device=GPU
 SET platform=<0...n>
 SET card=<0...n>
@@ -25,13 +25,13 @@ SET loops=<2-10>
 
 ::Choose minername and param depending on use of loops
 SET minername=%host% : %minerbin% - %compute%,%workitems%
-SET params=-mode %node% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%
+SET params=-mode %mode% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%
 ::Comment out above two lines and uncomment following two lines for loops
 ::SET minername=%host% : %minerbin% - %compute%,%workitems%,loops:%loops%
-::SET params=-mode %node% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%,%loops%
+::SET params=-mode %mode% -server %host% -port %port% -user %wallet%.%worker% -pass %password% -miner %device%,%compute%,%workitems%,%platform%,%card%,%loops%
 
 ::Messaging and start
-ECHO Starting %minerbin% %node% instance on %device% at %host% to %wallet%
+ECHO Starting %minerbin% %mode% instance on %device% at %host% to %wallet%
 ECHO Params: %params%
 START /MIN "%minername%" %minerbin% %params%
 TIMEOUT /T %timeout%
