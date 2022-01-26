@@ -4,7 +4,7 @@
 mode=solo
 host=http://<node_rpcaddress>:<node_rpcport>/
 user=<node_rpcuser>
-pass=<node_rpcpassword
+pass=<node_rpcpassword>
 address=<wallet>
 
 minerbin=dyn_miner2
